@@ -1,0 +1,119 @@
+{
+  "title": "Can Pricing Agents Collude Without Words?",
+  "author": "Yuvraj Pandey",
+  "sprint": "AI Collusion Research Sprint, October 2026",
+  "scope": "Completed primary model experiments and fixed-state diagnostics only. No pilots or superseded partial runs.",
+  "archive_sha256": "27a1c26b8150a72b2a442c5b203efb7e50e393fc7d780bdc56fc63d71f283453",
+  "archive_members_sha256": {
+    "clef/final/manifest.json": "25daaf1be76778202ed07af039d6b600f2c8d354a04da39ed69d72bfd471027d",
+    "clef/final/main.jsonl": "af09de9a642febe6aab74d0fa604013f4a00ad0d2cb5567b44a6ef0b52fb204c",
+    "clef/final/donors.jsonl": "61f0d442817744a2c91670b0764fb9ca962ef690c826741d61b9a2932ec906a0",
+    "clef/final/branches.jsonl": "d89a162999923cf2eeaa5c67b44f702456e46ed56ca01d7cd51b71135b2f3ccd",
+    "clef/final/branch_parents.json": "072e59ec91a27f2463459ffcdba24fa8e6f2a12479aaaacf7921413fc29052f9",
+    "clef/final/donor_paths.json": "a73bba0b78c8910fafb202c981f15a81136f2f252481a4944a3100dd6f25938e",
+    "clef/final/scripted_controls.json": "9dcbe4555e778537e44776674a7dc71a967e0db4cee46aba5fc1427ce3b834a1",
+    "clef/final/summary.json": "e631a5a5fe35b056d30cad04ada789763e7588de54dd00e7b3f190c2d74f18e6",
+    "clef/final/validation.json": "8d69fbbeb06ef0af49d4431617ee84b9e26f02fb91a7bec154c562d52505b565",
+    "clef/diagnostics.json": "7f80670b96f8dc3437c96929077cee9161752a2783fd92981a27828f29c06a6c",
+    "clef/executed_source/market.py": "b096e1273ecc90f3be048adac20a5496ddcb25250fe1c62593f60e8d3a380921",
+    "clef/executed_source/runner.py": "35c9d50de1d4dbb947e4fdc938a5021a20b97099dd04ef07e2a1d2e428c24a77",
+    "clef/executed_source/adapters.py": "1a7396523954d2da6fa2db2385a0842eccfd2368fa26d6ddad60b3bacb73bd3f",
+    "clef/executed_source/diagnostics.py": "c80c659481415d4e199eca12a79c33785c0dfcbe064cc33f690e25b083bc1ac4",
+    "qwen/final/manifest.json": "d546d6b04c5c36fd98de8bc58e0121fb29eaa7caa5085c5a88c746e0316c1724",
+    "qwen/final/main.jsonl": "0a44cdf04a768339ce7e8f6f96b81d764b94764c9e92c4855b81575a57593c05",
+    "qwen/final/donors.jsonl": "4f47738a59d524f965c01967e79632bc681a5556502e867e4272b37cde43844a",
+    "qwen/final/branches.jsonl": "78acaf3ccefdd13f17a03757b27282716fc47221584e988906098c83905573a0",
+    "qwen/final/branch_parents.json": "1c3a0ed028961b21143f7d5ad18f7e52020271800bdcb0bf5ada72382d39cd32",
+    "qwen/final/donor_paths.json": "7476172f960b82bd471f4572799045ee873ab94dac28e41b32bb1608fd3d639e",
+    "qwen/final/scripted_controls.json": "9dcbe4555e778537e44776674a7dc71a967e0db4cee46aba5fc1427ce3b834a1",
+    "qwen/final/summary.json": "db9e2aa56995141540cbfe92c435455cee4ca32917022de55fc6ad4f1d92bbeb",
+    "qwen/final/validation.json": "ae8173afee7d7811ea21639323ae5825a9bd26a80a1c2db81b89764d421be5cf",
+    "qwen/diagnostics.json": "092800f29f8fc77b3d2147cf6f4bc244a88bb14c7a431c8a4f008909ec1d9fc4",
+    "qwen/executed_source/market.py": "b096e1273ecc90f3be048adac20a5496ddcb25250fe1c62593f60e8d3a380921",
+    "qwen/executed_source/runner.py": "35c9d50de1d4dbb947e4fdc938a5021a20b97099dd04ef07e2a1d2e428c24a77",
+    "qwen/executed_source/adapters.py": "f2e679acc9583280117a6063445313542b3c3d18e7cbe1278db8aac1a6d9f073",
+    "qwen/executed_source/diagnostics.py": "c80c659481415d4e199eca12a79c33785c0dfcbe064cc33f690e25b083bc1ac4"
+  },
+  "analysis_source_sha256": {
+    "src/adapters.py": "f2e679acc9583280117a6063445313542b3c3d18e7cbe1278db8aac1a6d9f073",
+    "src/analyze.py": "1ef9636cd3540d59517ddd0c670b114ad5c6b2e6c22b4b7d30e9dc95fcd8d31a",
+    "src/compare.py": "564b680eab242a36c4ae24fe735b119cde308c5057963665c250c427db441308",
+    "src/diagnostics.py": "c80c659481415d4e199eca12a79c33785c0dfcbe064cc33f690e25b083bc1ac4",
+    "src/market.py": "b096e1273ecc90f3be048adac20a5496ddcb25250fe1c62593f60e8d3a380921",
+    "src/plot_paper.py": "c2e0520997c8f655ac53db08a986dea63bb0617eb9772adf520a7e2913ab76a0",
+    "src/runner.py": "35c9d50de1d4dbb947e4fdc938a5021a20b97099dd04ef07e2a1d2e428c24a77",
+    "src/test_market.py": "9a35c698f3c94f783e4ad7b32ad3c39ab87ec2db307047abe185650a5fe2ddab"
+  },
+  "models": {
+    "clef": {
+      "model_id": "Cloudflare/clef-flash",
+      "revision": "f0b7d3cd65296abfe459e6c228b618f5d8b26d2f",
+      "markets_per_condition": 20,
+      "conditions": [
+        "live",
+        "own_history",
+        "replay"
+      ],
+      "rounds": 80,
+      "branch_rounds": 20,
+      "history_window": 10,
+      "donors": 4,
+      "base_seed": 271828,
+      "record_count": 11840,
+      "model_evaluations": 9820,
+      "original_primary_contrast": {
+        "estimate": -0.0857539347692339,
+        "live_n": 20,
+        "replay_n": 20,
+        "iid_market_ci95": [
+          -0.24244289025945054,
+          0.06864461228991361
+        ],
+        "replay_hierarchical_donor_ci95": [
+          -0.377003909398063,
+          0.20343336720340854
+        ],
+        "independent_replay_donors": 4,
+        "small_donor_warning": false
+      }
+    },
+    "qwen": {
+      "model_id": "Qwen/Qwen3.5-9B",
+      "revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+      "markets_per_condition": 12,
+      "conditions": [
+        "live",
+        "own_history",
+        "replay"
+      ],
+      "rounds": 60,
+      "branch_rounds": 15,
+      "history_window": 10,
+      "donors": 3,
+      "base_seed": 271828,
+      "record_count": 5400,
+      "model_evaluations": 4488,
+      "original_primary_contrast": {
+        "estimate": 0.13643867976897364,
+        "live_n": 12,
+        "replay_n": 12,
+        "iid_market_ci95": [
+          -0.021348263398614616,
+          0.29539904498672853
+        ],
+        "replay_hierarchical_donor_ci95": [
+          -0.059628013927345125,
+          0.3246423920568086
+        ],
+        "independent_replay_donors": 3,
+        "small_donor_warning": true
+      }
+    }
+  },
+  "cpu_tested_versions": {
+    "python": "3.12.14",
+    "numpy": "2.5.4",
+    "matplotlib": "3.11.2"
+  },
+  "source_note": "Analysis scripts copied from the study workspace; plot paths adapted for this self-contained folder. Original per-model inference source snapshots are inside the archive."
+}
