@@ -84,8 +84,8 @@ for name,rel in [('Clef-flash','data/clef'),('Qwen3.5-9B','data/qwen')]:
  EVIDENCE['models'][name]={'terminal_summary':s['conditions'],'primary_contrast':s['primary_live_minus_replay_G']}
 
 # Figure 1: trajectory and terminal profit; same scales within rows.
-fig,axes=plt.subplots(2,2,figsize=(5.5,4.45),sharey='row')
-fig.subplots_adjust(left=.105,right=.985,bottom=.105,top=.875,hspace=.55,wspace=.19)
+fig,axes=plt.subplots(2,2,figsize=(5.5,3.55),sharey='row')
+fig.subplots_adjust(left=.105,right=.985,bottom=.10,top=.88,hspace=.48,wspace=.19)
 for col,(name,d) in enumerate(DATA.items()):
  ax=axes[0,col];T=d['manifest']['rounds'];H=d['manifest']['branch_rounds']
  ax.axvspan(T-H+1,T,color='#E8EAEC',alpha=.65,zorder=0)
@@ -96,7 +96,7 @@ for col,(name,d) in enumerate(DATA.items()):
  ax.axhline(1.475,color='#454545',ls='--',lw=.8)
  ax.axhline(1.925,color='#454545',ls=':',lw=.8)
  ax.set(xlim=(1,T),ylim=(1.35,1.98),xlabel='Round',title=f"{'a' if col==0 else 'b'}  {name} ($n={d['manifest']['markets_per_condition']}$)")
- ax.set_yticks([1.4,1.475,1.7,1.925]);ax.set_yticklabels(['1.40','1.475','1.70','1.925'])
+ ax.set_yticks([1.35,1.475,1.7,1.925]);ax.set_yticklabels(['1.35','1.475','1.70','1.925'])
  clean(ax)
  ax=axes[1,col]
  ax.axhline(0,color='#454545',ls='--',lw=.8)
@@ -121,8 +121,8 @@ fig.legend(handles=handles,loc='upper center',bbox_to_anchor=(.54,.995),ncol=4,f
 save(fig,'outcomes')
 
 # Added figure: full price probabilities over live rounds, preserving all original plots.
-fig,axes=plt.subplots(1,2,figsize=(5.5,2.65),sharey=True)
-fig.subplots_adjust(left=.115,right=.98,bottom=.32,top=.81,wspace=.17)
+fig,axes=plt.subplots(1,2,figsize=(5.5,2.40),sharey=True)
+fig.subplots_adjust(left=.115,right=.85,bottom=.26,top=.80,wspace=.17)
 heat_matrices={}
 for name,d in DATA.items():
  T=d['manifest']['rounds'];N=d['manifest']['markets_per_condition']
@@ -154,9 +154,9 @@ for j,(name,d) in enumerate(DATA.items()):
   'rounds':T,'price_grid':d['prices'].tolist(),'shared_linear_vmin':0,'shared_linear_vmax':vmax,
   'windows':stats}
 axes[0].set_ylabel('Available price')
-cax=fig.add_axes([.28,.105,.53,.045])
-cbar=fig.colorbar(im,cax=cax,orientation='horizontal')
-cbar.set_label('Mean action probability',labelpad=2)
+cax=fig.add_axes([.885,.26,.018,.54])
+cbar=fig.colorbar(im,cax=cax,orientation='vertical')
+cbar.set_label('Mean probability',labelpad=4)
 cbar.ax.tick_params(labelsize=7.5,length=2,pad=2)
 handles=[Line2D([],[],color='#606060',ls='--',lw=.8,label='Competitive price (1.475)'),
          Line2D([],[],color='#606060',ls=':',lw=.8,label='Joint-profit price (1.925)')]
@@ -165,8 +165,8 @@ fig.legend(handles=handles,loc='upper center',bbox_to_anchor=(.55,1.015),ncol=2,
 save(fig,'price_heatmap')
 
 # Figure 2: fixed-history distributions. No confidence interval from deterministic cases.
-fig,axes=plt.subplots(1,2,figsize=(5.5,2.15),sharey=True)
-fig.subplots_adjust(left=.1,right=.985,bottom=.22,top=.73,wspace=.17)
+fig,axes=plt.subplots(1,2,figsize=(5.5,2.00),sharey=True)
+fig.subplots_adjust(left=.1,right=.985,bottom=.22,top=.77,wspace=.17)
 for j,(name,d) in enumerate(DATA.items()):
  ax=axes[j];stats={}
  for h,label,ls in [('empty','No history',':'),('competitive','Competitive history','-'),('high','High-price history','-')]:

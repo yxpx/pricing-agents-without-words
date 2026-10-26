@@ -40,7 +40,7 @@
     "src/compare.py": "564b680eab242a36c4ae24fe735b119cde308c5057963665c250c427db441308",
     "src/diagnostics.py": "c80c659481415d4e199eca12a79c33785c0dfcbe064cc33f690e25b083bc1ac4",
     "src/market.py": "b096e1273ecc90f3be048adac20a5496ddcb25250fe1c62593f60e8d3a380921",
-    "src/plot_paper.py": "323ebb5810f6f4b7af67e7e78e22d7ed8f331ef0667eda6d78696d6cc777586d",
+    "src/plot_paper.py": "a68e42746667714928b43f3c3f8ba4a1a393cb6d1133e7bcdb035605a81d34fb",
     "src/runner.py": "35c9d50de1d4dbb947e4fdc938a5021a20b97099dd04ef07e2a1d2e428c24a77",
     "src/test_market.py": "9a35c698f3c94f783e4ad7b32ad3c39ab87ec2db307047abe185650a5fe2ddab"
   },
