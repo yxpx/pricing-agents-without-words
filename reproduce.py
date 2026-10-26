@@ -74,11 +74,11 @@ def main():
         summaries[name] = {'complete': True, 'record_count':sum(x['actual_records'] for x in validation['stages'].values()),
                            'model_evaluations':validation['record_sources']['model'],
                            'primary_live_minus_replay_G':actual}
-    print('Rebuilding the shared-horizon comparison and all five figures...', flush=True)
+    print('Rebuilding the shared-horizon comparison and all six figures...', flush=True)
     run(ROOT / 'src/compare.py', '--clef', data / 'clef/final', '--qwen', data / 'qwen/final',
         '--out', outputs / 'comparison.json', quiet=True)
     run(ROOT / 'src/plot_paper.py', quiet=True)
-    expected_figures = ['outcomes', 'history', 'interventions', 'diagnostics', 'controls']
+    expected_figures = ['outcomes', 'history', 'interventions', 'diagnostics', 'controls', 'price_heatmap']
     for name in expected_figures:
         if not (outputs / 'figures' / f'{name}.pdf').is_file():
             raise RuntimeError(f'Figure missing: {name}')

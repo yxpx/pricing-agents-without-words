@@ -16,6 +16,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
+from matplotlib import patheffects
 from matplotlib.ticker import MultipleLocator
 import numpy as np
 from analyze import hier_means
@@ -118,6 +119,50 @@ axes[1,0].set_ylabel('Profit gain $G$')
 handles=[Line2D([],[],color=COLORS['live'],label='Live'),Line2D([],[],color=COLORS['own_history'],label='Own history'),Line2D([],[],color='#454545',ls='--',lw=.8,label='Competitive'),Line2D([],[],color='#454545',ls=':',lw=.8,label='Joint profit')]
 fig.legend(handles=handles,loc='upper center',bbox_to_anchor=(.54,.995),ncol=4,frameon=False,columnspacing=1.2,handlelength=1.8)
 save(fig,'outcomes')
+
+# Added figure: full price probabilities over live rounds, preserving all original plots.
+fig,axes=plt.subplots(1,2,figsize=(5.5,2.65),sharey=True)
+fig.subplots_adjust(left=.115,right=.98,bottom=.32,top=.81,wspace=.17)
+heat_matrices={}
+for name,d in DATA.items():
+ T=d['manifest']['rounds'];N=d['manifest']['markets_per_condition']
+ cube=np.array([[d['raw'][(f'live_{i:03}',t)]['probabilities']for t in range(T)]for i in range(N)])
+ assert cube.shape==(N,T,11)
+ np.testing.assert_allclose(cube.sum(axis=2),1,atol=1e-6)
+ heat_matrices[name]=cube.mean(axis=0)
+# Same linear scale in both panels; no smoothing or per-panel normalization.
+vmax=max(float(x.max())for x in heat_matrices.values())
+for j,(name,d) in enumerate(DATA.items()):
+ ax=axes[j];T=d['manifest']['rounds'];H=d['manifest']['branch_rounds'];pr=heat_matrices[name]
+ edges=np.r_[d['prices']-.0375,d['prices'][-1]+.0375]
+ im=ax.pcolormesh(np.arange(T+1)+.5,edges,pr.T,shading='flat',
+                  cmap='Blues',vmin=0,vmax=vmax,edgecolors='none',antialiased=False)
+ ax.set_xlim(.5,T+.5);ax.set_ylim(edges[0],edges[-1])
+ ax.axhline(1.475,color='#606060',ls='--',lw=.8,
+            path_effects=[patheffects.withStroke(linewidth=1.8,foreground='white')])
+ ax.axhline(1.925,color='#606060',ls=':',lw=.8)
+ ax.set(xlabel='Round',title=f"{'a'if j==0 else'b'}  {name} ($n={d['manifest']['markets_per_condition']}$)")
+ ax.set_yticks([1.25,1.475,1.7,1.925,2.0]);ax.set_yticklabels(['1.250','1.475','1.700','1.925','2.000'])
+ ax.tick_params(length=3,pad=3)
+ stats={}
+ for label,x in [('first_five',pr[:5]),('final_quarter',pr[-H:])]:
+  stats[label]={'rounds':len(x),'mean_probabilities':x.mean(axis=0).tolist(),
+                'competitive_band_1.400_to_1.550':float(x[:,2:5].sum(axis=1).mean()),
+                'price_at_least_1.850':float(x[:,8:].sum(axis=1).mean())}
+ EVIDENCE['models'][name]['live_probability_heatmap']={
+  'mean_probabilities_by_round':pr.tolist(),'markets':d['manifest']['markets_per_condition'],
+  'rounds':T,'price_grid':d['prices'].tolist(),'shared_linear_vmin':0,'shared_linear_vmax':vmax,
+  'windows':stats}
+axes[0].set_ylabel('Available price')
+cax=fig.add_axes([.28,.105,.53,.045])
+cbar=fig.colorbar(im,cax=cax,orientation='horizontal')
+cbar.set_label('Mean action probability',labelpad=2)
+cbar.ax.tick_params(labelsize=7.5,length=2,pad=2)
+handles=[Line2D([],[],color='#606060',ls='--',lw=.8,label='Competitive price (1.475)'),
+         Line2D([],[],color='#606060',ls=':',lw=.8,label='Joint-profit price (1.925)')]
+fig.legend(handles=handles,loc='upper center',bbox_to_anchor=(.55,1.015),ncol=2,
+           frameon=False,columnspacing=1.4,handlelength=2)
+save(fig,'price_heatmap')
 
 # Figure 2: fixed-history distributions. No confidence interval from deterministic cases.
 fig,axes=plt.subplots(1,2,figsize=(5.5,2.15),sharey=True)

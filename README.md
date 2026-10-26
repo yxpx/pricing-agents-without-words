@@ -13,7 +13,7 @@ pip install -r requirements.txt
 python reproduce.py
 ```
 
-The command checks the saved data, recomputes the results, and generates five figures in `outputs/`. Runs on CPU; no model downloads or API calls.
+The command checks the saved data, recomputes the results, and generates six figures in `outputs/`. Runs on CPU; no model downloads or API calls.
 
 ## Experiments
 
